@@ -19,6 +19,7 @@ client = MongoClient(mongo_uri)
 db = client["terrahacks"]
 patientsCollection = db["patients"]
 patients = list(patientsCollection.find({}, {"_id": 0}))  # Exclude _id field
+patientsId = list(patientsCollection.find({}, {}))
 
 @app.route("/")
 def index():
