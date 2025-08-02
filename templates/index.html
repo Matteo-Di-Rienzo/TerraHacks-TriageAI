@@ -4,26 +4,22 @@
     <title>Flask Demo</title>
 </head>
 <body>
-    <h2>Fill the form</h2>
-    <form method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" required><br><br>
+    <h2>Add Patient</h2>
 
-        <label>Favorite Color:</label>
-        <select name="color">
-            <option value="Red">Red</option>
-            <option value="Blue">Blue</option>
-            <option value="Green">Green</option>
-        </select><br><br>
+    <form id="patient-form">
+        <label>Name:</label>
+        <input type="text" id="name" required />
+
+        <label>Age:</label>
+        <input type="number" id="age" required />
+
+        <label>Health Concern:</label>
+        <input type="text" id="concern" required />
 
         <button type="submit">Submit</button>
-        <button type="reset">Reset</button>
     </form>
 
-    {% if submitted %}
-        <h3>Submitted Data:</h3>
-        <p>Name: {{ data.name }}</p>
-        <p>Color: {{ data.color }}</p>
-    {% endif %}
+
+    <script src="/static/script.js"></script>
 </body>
 </html>
