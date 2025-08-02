@@ -6,7 +6,6 @@
 </head>
 <body>
     <h2>Add Patient</h2>
-# height weight, time of accident, time of admit
     <form id="patient-form">
         <label>Name:</label>
         <input type="text" id="name" required />
@@ -29,7 +28,7 @@
         <label>Health Concern:</label>
         <textarea id="concern" rows="4" cols="50" required></textarea>
 
-        <button type="submit">Submit</button>
+        <button type="button" id="gemini-btn">Get Gemini Insights</button>
 
         <a href="/patients">View All Patients & Edit</a>
     </form>
