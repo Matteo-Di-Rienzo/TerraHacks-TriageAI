@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>AI Output</title>
+  <meta charset="utf-8" />
+  <title>AI Insights</title>
 </head>
 <body>
-  <h1>AI Recommendation</h1>
-  
-  
+  <h1>AI Insights</h1>
+  <pre style="white-space: pre-wrap;">{{ insight }}</pre>
+  <a href="/">← Back</a>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

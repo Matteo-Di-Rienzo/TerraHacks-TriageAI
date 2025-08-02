@@ -70,27 +70,27 @@ def update_patient():
     )
     return redirect("/patients")
 
+@app.route("/vellum", methods=["POST"])
+def vellum_insight():
+  client = Vellum(
+    api_key=os.environ["VELLUM_API_KEY"]
+  )
+  # patients_data = list(patientsCollection.find({}, {"_id": 0}))  # Get all patients, exclude _id
 
+  value_patients=json.dumps(list(patientsCollection.find({}, {"_id": 0})))  # Convert to JSON string
 
-client = Vellum(
-  api_key=os.environ["VELLUM_API_KEY"]
-)
-# patients_data = list(patientsCollection.find({}, {"_id": 0}))  # Get all patients, exclude _id
-
-value_patients=json.dumps(list(patientsCollection.find({}, {"_id": 0})))  # Convert to JSON string
-
-result = client.execute_prompt(
-    prompt_deployment_name="terra-hacks-er-triage-system-variant-1",
-    release_tag="LATEST",
-    inputs=[
-        types.StringInputRequest(
-            name="patients_list",
-            value=value_patients,
-        ),
-    ],
-)
-
-if result.state == "REJECTED":
-    raise Exception(result.error.message)
-
-print(result.outputs)
+  result = client.execute_prompt(
+      prompt_deployment_name="terra-hacks-er-triage-system-variant-1",
+      release_tag="LATEST",
+      inputs=[
+          types.StringInputRequest(
+              name="patients_list",
+              value=value_patients,
+          ),
+      ],
+  )
+  if result.state == "REJECTED":
+      raise Exception(result.error.message)
+  insight = result.outputs
+  insight = "test, insight"
+  return render_template("output.html", insight=insight)

@@ -17,7 +17,7 @@ patientForm.addEventListener("submit", e => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, age, height, weight, 
                           incidentTime, admittanceTime,  
-                          concern})
+                          concern })
   })
     .then(res => res.json())
     .then(() => {
@@ -27,9 +27,15 @@ patientForm.addEventListener("submit", e => {
       console.error("Failed to load", err)});
   });
 
-const geminiBtn = document.getElementById("gemini-btn");
-geminiBtn.addEventListener("click", () => {
-  fetch("/gemini", { method: "POST" })
-    .then(res => res.json())
-    .then(data => alert(data.gemini_response));
+
+const vellumBtn = document.getElementById("vellum-btn");
+vellumBtn.addEventListener("click", e => {
+  e.preventDefault();
+
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = "/vellum";
+  document.body.appendChild(form);
+  form.submit();
 });
+
