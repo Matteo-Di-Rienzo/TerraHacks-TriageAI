@@ -92,5 +92,4 @@ def vellum_insight():
   if result.state == "REJECTED":
       raise Exception(result.error.message)
   insight = result.outputs
-  insight = "test, insight"
   return render_template("output.html", insight=insight)
