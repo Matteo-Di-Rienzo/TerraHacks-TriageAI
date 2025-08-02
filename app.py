@@ -76,8 +76,10 @@ def vellum_insight():
     api_key=os.environ["VELLUM_API_KEY"]
   )
   # patients_data = list(patientsCollection.find({}, {"_id": 0}))  # Get all patients, exclude _id
-
-  value_patients=json.dumps(list(patientsCollection.find({}, {"_id": 0})))  # Convert to JSON string
+  patients = list(patientsCollection.find({}))
+  for p in patients:
+    p["_id"] = str(p["_id"])
+  value_patients=json.dumps(patients)  # Convert to JSON string
 
   result = client.execute_prompt(
       prompt_deployment_name="terra-hacks-er-triage-system-variant-1",
