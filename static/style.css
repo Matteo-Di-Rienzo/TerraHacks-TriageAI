@@ -1,55 +1,196 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f0f0f0;
-}
-form {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  max-width: 400px;
-  margin: 40px auto;
-}
-label {
-  display: block;
-  margin-top: 10px;
-}
-input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-button {
-  background: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-button:hover {
-  background: #0056b3;
+/* static/style.css */
+
+/* 1) Import a clean sans-serif */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #4A90E2;
+  --primary-dark: #357ABD;
+  --background: #F5F7FA;
+  --surface: #FFFFFF;
+  --text: #333333;
+  --text-secondary: #666666;
+  --border: #DDDDDD;
+  --radius: 6px;
+  --gap: 1rem;
+  --transition: 0.3s ease;
 }
 
-.priority-table {
-  width: 60%;
-  margin: 20px auto;
-  border-collapse: collapse;
-  background: #fff;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  padding: var(--gap);
+}
+
+/* Centered card/container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--surface);
+  padding: calc(var(--gap) * 2);
+  border-radius: var(--radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
-.priority-table th, .priority-table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
+
+/* Headings */
+h1, h2, h3 {
+  margin-bottom: var(--gap);
+  font-weight: 600;
 }
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"],
+textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: var(--gap);
+  font-size: 1rem;
+  transition: border-color var(--transition);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Buttons */
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--primary);
+  color: var(--surface);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Links */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Tables (AI Insights) */
+table, .priority-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: calc(var(--gap) * 2);
+}
+
+.priority-table thead th {
+  background-color: var(--primary);
+  color: var(--surface);
+  text-align: left;
+  padding: 0.75rem 1rem;
+}
+
+.priority-table tbody tr:nth-child(even) {
+  background-color: #FBFBFB;
+}
+
+.priority-table td,
 .priority-table th {
-  background: #007bff;
-  color: #fff;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
 }
-.priority-table tr:nth-child(even) {
-  background: #f9f9f9;
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .container {
+    padding: var(--gap);
+  }
+
+  input, textarea, button {
+    width: 100%;
+  }
+}
+
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+.patient-table th, .patient-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.patient-table th {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+
+.patient-table tbody tr:nth-child(even) {
+  background-color: #F9FAFB;
+}
+
+.patient-table td form {
+  display: inline;
+}
+
+.patient-table button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+/* at the bottom of static/style.css */
+
+/* Layout the two action buttons in one row, with a gap */
+.patient-table td:last-child {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;    /* space between Delete and Edit */
+  white-space: nowrap;
+}
+
+/* get rid of the old inline-form rule if you like,
+   flex will handle the layout */
+.patient-table td form {
+  display: block;
+  margin: 0;      /* remove any default margins */
 }

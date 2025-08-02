@@ -3,27 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <title>All Patients</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>All Patients</h1>
-  {% for p in patients %}
-    <li>{{ p.name }} - {{ p.age }} 
-        {{ p.height }} {{ p.weight }} 
-        {{ p.incidentTime }} {{ p.admittanceTime }} 
-        {{ p.concern }}</li>
+  <div class="container">
+    <h1>All Patients</h1>
 
-        <form action="/delete/{{ p._id }}" method="POST" style="display:inline;">
-          <button type="submit">Delete</button>
+    <table class="patient-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Height (cm)</th>
+          <th>Weight (lbs)</th>
+          <th>Incident Time</th>
+          <th>Admittance Time</th>
+          <th>Concern</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patients %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td>{{ p.age }}</td>
+          <td>{{ p.height }}</td>
+          <td>{{ p.weight }}</td>
+          <td>{{ p.incidentTime }}</td>
+          <td>{{ p.admittanceTime }}</td>
+          <td>{{ p.concern }}</td>
+          <td>
+            <form action="/delete/{{ p._id }}" method="POST" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+            <form action="/edit/{{ p._id }}" method="GET" style="display:inline;">
+              <button type="submit">Edit</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-        </form>
-
-        <form action="/edit/{{ p._id }}" method="GET" style="display:inline;">
-          <button type="submit">Edit</button>
-        </form>
-  {% endfor %}
-
-  <form action="/vellum" method="POST">
-    <button type="generate">Generate Vellum Insights</button>
-  </form>
+    <form action="/vellum" method="POST">
+      <button type="submit">Generate Vellum Insights</button>
+    </form>
+  </div>
 </body>
 </html>
