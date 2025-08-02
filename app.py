@@ -12,14 +12,16 @@ load_dotenv()
 
 app = Flask(__name__)
 mongo_uri = os.getenv("MONGO_URI")
-vellum_api_key = os.getenv("VELLUM_API_KEY")
+# vellum_api_key = os.getenv("VELLUM_API_KEY")
 
 
 client = MongoClient(mongo_uri)
 db = client["terrahacks"]
 patientsCollection = db["patients"]
-patients = list(patientsCollection.find({}, {"_id": 0}))  # Exclude _id field
-patientsId = list(patientsCollection.find({}, {}))
+patients = list(patientsCollection.find({}))
+for p in patients:
+  p["_id"] = str(p["_id"])
+# patientsId = list(patientsCollection.find({}, {}))
 
 @app.route("/")
 def index():
@@ -69,7 +71,7 @@ def update_patient():
 
 # pip install vellum-ai
 client = Vellum(
-  api_key=os.getenv["VELLUM_API_KEY"]
+  api_key=os.environ["VELLUM_API_KEY"]
 )
 # patients_data = list(patientsCollection.find({}, {"_id": 0}))  # Get all patients, exclude _id
 value_patients=json.dumps(patients)  # Convert to JSON string
