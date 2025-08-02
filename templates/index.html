@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Demo</title>
+</head>
+<body>
+    <h2>Fill the form</h2>
+    <form method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label>Favorite Color:</label>
+        <select name="color">
+            <option value="Red">Red</option>
+            <option value="Blue">Blue</option>
+            <option value="Green">Green</option>
+        </select><br><br>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+
+    {% if submitted %}
+        <h3>Submitted Data:</h3>
+        <p>Name: {{ data.name }}</p>
+        <p>Color: {{ data.color }}</p>
+    {% endif %}
+</body>
+</html>
