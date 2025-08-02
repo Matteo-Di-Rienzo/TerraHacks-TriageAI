@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, redirect
 from pymongo import MongoClient
+from bson import ObjectId
 from dotenv import load_dotenv
 import os
 import google.generativeai as genai
@@ -27,11 +28,10 @@ def add_patients():
   patientsCollection.insert_one(data)
   return jsonify({"status": "ok"})
   
-@app.route("/delete", methods=["POST"])
-def delete_patients():
-  data = request.json
-  patientsCollection.delete_one(data)
-  return jsonify({"status": "ok"})
+@app.route("/delete/<id>", methods=["POST"])
+def delete_patients(id):
+  patientsCollection.delete_one({"_id": ObjectId(id)})
+  return redirect("/patients")
 
 @app.route("/patients", methods=["GET"])
 def view_patients():

@@ -7,7 +7,15 @@
 <body>
   <h1>All Patients</h1>
   {% for p in patients %}
-    <li>{{ p.name }} - {{ p.age }}</li>
+    <li>{{ p.name }} - {{ p.age }} 
+        {{ p.height }} {{ p.weight }} 
+        {{ p.incidentTime }} {{ p.admittanceTime }} 
+        {{ p.concern }}</li>
+
+        <form action="/delete/{{ p._id }}" method="POST" style="display:inline;">
+          <button type="submit">Delete</button>
+
+        </form>
   {% endfor %}
 
 </body>
