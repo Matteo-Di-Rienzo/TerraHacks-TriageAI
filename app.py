@@ -15,10 +15,13 @@ api_key = os.getenv("GEMINI_API_KEY")
 client = MongoClient(mongo_uri)
 db = client["terrahacks"]
 patientsCollection = db["patients"]
+patients = list(patientsCollection.find({}))
+
 
 
 @app.route("/")
 def index():
+  print(patients)
   return render_template("index.html")
 
 
@@ -35,7 +38,6 @@ def delete_patients(id):
 
 @app.route("/patients", methods=["GET"])
 def view_patients():
-  patients = list(patientsCollection.find({}))
   return render_template("patients.html", patients=patients)
 
 @app.route("/edit/<id>", methods=["GET"])
@@ -63,11 +65,7 @@ def update_patient():
 
 
 @app.route("/gemini", methods=["POST"])
-def gemini():
-  # Fetch all patients from MongoDB
-  patients = list(patientsCollection.find({}, {"_id": 0}))
-  # Prepare the prompt or data for Gemini
-  
+def gemini():  
   # -------------To be edited by Prithvi--------------
   prompt = f"Here is the patient data: {patients}. What insights can you provide?"
 
