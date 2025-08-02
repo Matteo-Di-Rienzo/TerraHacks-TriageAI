@@ -82,7 +82,7 @@ def vellum_insight():
   value_patients=json.dumps(patients)  # Convert to JSON string
 
   result = client.execute_prompt(
-      prompt_deployment_name="terra-hacks-er-triage-system-variant-1",
+      prompt_deployment_name="terrahacks-2-variant-1",
       release_tag="LATEST",
       inputs=[
           types.StringInputRequest(
