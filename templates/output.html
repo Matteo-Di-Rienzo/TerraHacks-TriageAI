@@ -3,11 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <title>AI Insights</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <h1>AI Insights</h1>
   <pre style="white-space: pre-wrap;">{{ insight }}</pre>
   <a href="/">← Back</a>
+
+  <h3>Priority List</h3>
+  <table class="priority-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Patient Number</th>
+        <th>ESI Level</th>
+        <th> Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if insight %}
+        {% set lines = insight[0].value.split('\n') %}
+        {% for line in lines %}
+          {% if '|' in line and 'Name' not in line and '---' not in line %}
+            {% set cols = line.split('|') %}
+            {% if cols|length > 3 %}
+              <tr>
+                <td>{{ cols[1].strip() }}</td>
+                <td>{{ cols[2].strip() }}</td>
+                <td>{{ cols[3].strip() }}</td>
+              </tr>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

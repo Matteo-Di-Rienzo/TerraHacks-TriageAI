@@ -33,3 +33,23 @@ button {
 button:hover {
   background: #0056b3;
 }
+
+.priority-table {
+  width: 60%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.priority-table th, .priority-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+.priority-table th {
+  background: #007bff;
+  color: #fff;
+}
+.priority-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
