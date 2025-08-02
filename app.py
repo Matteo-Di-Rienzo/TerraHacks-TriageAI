@@ -43,8 +43,9 @@ def edit_patients(id):
   patient = patientsCollection.find_one({"_id": ObjectId(id)})
   return render_template("edit.html", patient=patient)
 
-@app.route("/update/<id>", methods=["POST"])
-def update_patient(id):
+@app.route("/update", methods=["POST"])
+def update_patient():
+    id = request.form["id"]
     updated_data = {
         "name": request.form["name"],
         "age": int(request.form["age"]),
@@ -54,12 +55,10 @@ def update_patient(id):
         "admittanceTime": request.form["admittanceTime"],
         "concern": request.form["concern"]
     }
-
     patientsCollection.update_one(
         {"_id": ObjectId(id)},
         {"$set": updated_data}
     )
-
     return redirect("/patients")
 
 
