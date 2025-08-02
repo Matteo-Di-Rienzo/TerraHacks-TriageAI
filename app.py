@@ -18,14 +18,13 @@ mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)
 db = client["terrahacks"]
 patientsCollection = db["patients"]
-patients = list(patientsCollection.find({}))
-for p in patients:
-  p["_id"] = str(p["_id"])
+# patients = list(patientsCollection.find({}))
+# for p in patients:
+#   p["_id"] = str(p["_id"])
 # patientsId = list(patientsCollection.find({}, {}))
 
 @app.route("/")
 def index():
-  print(patients)
   return render_template("index.html")
 
 
@@ -42,6 +41,10 @@ def delete_patients(id):
 
 @app.route("/patients", methods=["GET"])
 def view_patients():
+  patients = list(patientsCollection.find({}))
+  for p in patients:
+    p["_id"] = str(p["_id"])
+
   return render_template("patients.html", patients=patients)
 
 @app.route("/edit/<id>", methods=["GET"])
@@ -69,12 +72,12 @@ def update_patient():
 
 
 
-# pip install vellum-ai
 client = Vellum(
   api_key=os.environ["VELLUM_API_KEY"]
 )
 # patients_data = list(patientsCollection.find({}, {"_id": 0}))  # Get all patients, exclude _id
-value_patients=json.dumps(patients)  # Convert to JSON string
+
+value_patients=json.dumps(list(patientsCollection.find({}, {"_id": 0})))  # Convert to JSON string
 
 result = client.execute_prompt(
     prompt_deployment_name="terra-hacks-er-triage-system-variant-1",
