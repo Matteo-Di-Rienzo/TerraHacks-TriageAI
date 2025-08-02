@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
@@ -14,7 +14,8 @@ patientsCollection = db["patients"]
 
 
 @app.route("/")
-def home():
+def index():
+  return render_template("index.html")
   return f"Connected: {mongo_uri}"
 
 
