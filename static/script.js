@@ -27,12 +27,9 @@ patientForm.addEventListener("submit", e => {
       console.error("Failed to load", err)});
   });
 
-// Gemini button handler (add after the above code)
 const geminiBtn = document.getElementById("gemini-btn");
 geminiBtn.addEventListener("click", () => {
-fetch("/gemini", { method: "POST" })
-.then(res => res.json())
-.then(data => {
-    alert(data.gemini_response);
-});
+  fetch("/gemini", { method: "POST" })
+    .then(res => res.json())
+    .then(data => alert(data.gemini_response));
 });
