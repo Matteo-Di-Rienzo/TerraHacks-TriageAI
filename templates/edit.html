@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Patient</title>
+</head>
+<body>
+  <h1>Edit Patient</h1>
+
+  <form action="/update/{{ patient._id }}" method="POST">
+    <label>Name:</label>
+    <input type="text" name="name" value="{{ patient.name }}" required><br>
+
+    <label>Age:</label>
+    <input type="number" name="age" value="{{ patient.age }}" required><br>
+
+    <label>Height:</label>
+    <input type="text" name="height" value="{{ patient.height }}" required><br>
+
+    <label>Weight:</label>
+    <input type="text" name="weight" value="{{ patient.weight }}" required><br>
+
+    <label>Time of Incident:</label>
+    <input type="text" name="incidentTime" value="{{ patient.incidentTime }}" required><br>
+
+    <label>Time of Admittance:</label>
+    <input type="text" name="admittanceTime" value="{{ patient.admittanceTime }}" required><br>
+
+    <label>Health Concern:</label><br>
+    <textarea name="concern" rows="4" cols="50" required>{{ patient.concern }}</textarea><br><br>
+
+    <button type="submit">Update</button>
+  </form>
+
+  <a href="/patients">Cancel</a>
+</body>
+</html>

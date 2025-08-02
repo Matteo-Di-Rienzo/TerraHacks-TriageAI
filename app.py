@@ -38,6 +38,31 @@ def view_patients():
   patients = list(patientsCollection.find({}))
   return render_template("patients.html", patients=patients)
 
+@app.route("/edit/<id>", methods=["GET"])
+def edit_patients(id):
+  patient = patientsCollection.find_one({"_id": ObjectId(id)})
+  return render_template("edit.html", patient=patient)
+
+@app.route("/update/<id>", methods=["POST"])
+def update_patient(id):
+    updated_data = {
+        "name": request.form["name"],
+        "age": int(request.form["age"]),
+        "height": request.form["height"],
+        "weight": request.form["weight"],
+        "incidentTime": request.form["incidentTime"],
+        "admittanceTime": request.form["admittanceTime"],
+        "concern": request.form["concern"]
+    }
+
+    patientsCollection.update_one(
+        {"_id": ObjectId(id)},
+        {"$set": updated_data}
+    )
+
+    return redirect("/patients")
+
+
 @app.route("/gemini", methods=["POST"])
 def gemini():
   # Fetch all patients from MongoDB

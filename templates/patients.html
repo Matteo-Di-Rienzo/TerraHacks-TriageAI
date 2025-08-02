@@ -16,6 +16,10 @@
           <button type="submit">Delete</button>
 
         </form>
+
+        <form action="/edit/{{ p._id }}" method="POST" style="display:inline;">
+          <button type="submit">Edit</button>
+        </form>
   {% endfor %}
 
 </body>
