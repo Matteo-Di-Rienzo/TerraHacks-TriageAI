@@ -1,11 +1,8 @@
-/* static/style.css */
-
-/* 1) Import a clean sans-serif */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #4A90E2;
-  --primary-dark: #357ABD;
+  --primary: #37aa02;
+  --primary-dark: #24517e;
   --background: #F5F7FA;
   --surface: #FFFFFF;
   --text: #333333;
@@ -30,7 +27,6 @@ body {
   padding: var(--gap);
 }
 
-/* Centered card/container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -40,13 +36,11 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* Headings */
 h1, h2, h3 {
   margin-bottom: var(--gap);
   font-weight: 600;
 }
 
-/* Forms */
 form {
   display: flex;
   flex-direction: column;
@@ -76,7 +70,6 @@ textarea:focus {
   border-color: var(--primary);
 }
 
-/* Buttons */
 button {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -93,7 +86,6 @@ button:hover {
   background-color: var(--primary-dark);
 }
 
-/* Links */
 a {
   color: var(--primary);
   text-decoration: none;
@@ -105,7 +97,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Tables (AI Insights) */
 table, .priority-table {
   width: 100%;
   border-collapse: collapse;
@@ -178,19 +169,14 @@ table, .priority-table {
   font-size: 0.85rem;
 }
 
-/* at the bottom of static/style.css */
-
-/* Layout the two action buttons in one row, with a gap */
 .patient-table td:last-child {
   display: flex;
   align-items: center;
-  gap: 0.5rem;    /* space between Delete and Edit */
+  gap: 0.5rem;
   white-space: nowrap;
 }
 
-/* get rid of the old inline-form rule if you like,
-   flex will handle the layout */
 .patient-table td form {
   display: block;
-  margin: 0;      /* remove any default margins */
+  margin: 0;
 }

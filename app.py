@@ -12,16 +12,11 @@ load_dotenv()
 
 app = Flask(__name__)
 mongo_uri = os.getenv("MONGO_URI")
-# vellum_api_key = os.getenv("VELLUM_API_KEY")
 
 
 client = MongoClient(mongo_uri)
 db = client["terrahacks"]
 patientsCollection = db["patients"]
-# patients = list(patientsCollection.find({}))
-# for p in patients:
-#   p["_id"] = str(p["_id"])
-# patientsId = list(patientsCollection.find({}, {}))
 
 @app.route("/")
 def index():
@@ -75,11 +70,11 @@ def vellum_insight():
   client = Vellum(
     api_key=os.environ["VELLUM_API_KEY"]
   )
-  # patients_data = list(patientsCollection.find({}, {"_id": 0}))  # Get all patients, exclude _id
+
   patients = list(patientsCollection.find({}))
   for p in patients:
     p["_id"] = str(p["_id"])
-  value_patients=json.dumps(patients)  # Convert to JSON string
+  value_patients=json.dumps(patients)
 
   result = client.execute_prompt(
       prompt_deployment_name="terrahacks-2-variant-1",
