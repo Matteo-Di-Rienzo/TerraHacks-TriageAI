@@ -16,7 +16,6 @@ patientsCollection = db["patients"]
 @app.route("/")
 def index():
   return render_template("index.html")
-  return f"Connected: {mongo_uri}"
 
 
 @app.route("/add", methods=["POST"])
