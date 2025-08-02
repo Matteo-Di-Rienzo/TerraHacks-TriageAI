@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>Add Patient</h2>
-
+# height weight, time of accident, time of admit
     <form id="patient-form">
         <label>Name:</label>
         <input type="text" id="name" required />
@@ -13,10 +13,24 @@
         <label>Age:</label>
         <input type="number" id="age" required />
 
+        <label>Height</label>
+        <input type="text" id="height" required />
+
+        <label>Weight</label>
+        <input type="text" id="weight" required />
+
+        <label>Time of Incident</label>
+        <input type="text" id="incident-time" required />
+
+        <label>Time of Admittance</label>
+        <input type="text" id="admittance-time" required />
+
         <label>Health Concern:</label>
-        <input type="text" id="concern" required />
+        <textarea id="concern" rows="4" cols="50" required></textarea>
 
         <button type="submit">Submit</button>
+
+        <a href="/patients">View All Patients & Edit</a>
     </form>
 
 

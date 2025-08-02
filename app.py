@@ -16,11 +16,21 @@ patientsCollection = db["patients"]
 @app.route("/")
 def index():
   return render_template("index.html")
-  return f"Connected: {mongo_uri}"
 
 
 @app.route("/add", methods=["POST"])
 def add_patients():
-    data = request.json
-    patientsCollection.insert_one(data)
-    return jsonify({"status": "ok"})
+  data = request.json
+  patientsCollection.insert_one(data)
+  return jsonify({"status": "ok"})
+  
+@app.route("/delete", methods=["POST"])
+def delete_patients():
+  data = request.json
+  patientsCollection.delete_one(data)
+  return jsonify({"status": "ok"})
+
+@app.route("/patients", methods=["GET"])
+def view_patients():
+  patients = list(patientsCollection.find({}))
+  return render_template("patients.html", patients=patients)
